@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{%  load staticfiles %}
+{% block content %}
+
+     {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="container">
+    <div class="row ">
+        <div class="col m10 offset-m1 s12">
+            <div class="col s12">
+                 <h2 class="center-align">Contact Us</h2>
+                <p class="center-align">To send us a message fill out the below form.</p>
+
+                <div class="row">
+
+  <form method="post" class="col m8 offset-m2 s12" action=" ">
+       {% csrf_token %}
+
+      <div class="row">
+             <p>Name: <input type="text" name="name" required></p>
+    <p>Your e-mail: <input type="email" name="email" required></p>
+    <p>Message: <textarea  class="materialize-textarea" name="body" required></textarea></p>
+          <div class="center"> <button class="btn btn-large center" type="submit" value="Submit">Send<i class="material-icons right">send</i></button>
+</div>
+      </div>
+  </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+{% endblock content %}

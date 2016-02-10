@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="card small center">
+                <hr>
+                <ul class="collection with-header">
+                 <li class="collection-header"><h4>{{ question.question_text }}</h4></li>
+{% for choice in question.choice_set.all %}
+    <li><div>{{ choice.choice_text }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+    <li>{{ choice.choice_text }} {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+    <hr>
+{% endfor %}
+</ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<a href="{% url 'core:home' %}">Home</a>
+
+{% endblock %}

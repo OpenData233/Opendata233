@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% load i18n staticfiles %}
+
+{% block extra_head %}
+    <style type="text/css">
+        #content {width: 80%;}
+        #spinner {position: fixed; top: 50%; left: 50%; margin-top: -64px; margin-left: -64px; z-index: 3;}
+        .errorlist {color:red;}
+    </style>
+    <script type="text/javascript">
+        $(function() {
+            $('#spinner').hide();
+            $("table").DataTable({"bPaginate": false, "aaSorting": []});
+            $(document).hide().ajaxStart(function() {$('#spinner').show();})
+                              .ajaxStop(function() {$('#spinner').hide();});
+            $('.data_field').change(function() {
+                var identifier = $(this).attr('id');
+                var data_value = $(this).val();
+                $.post('{% url 'feedreader:update_item' %}',
+                    {'identifier' : identifier,
+                    'data_value': data_value,
+                    'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val()},
+                    function() {$('#'+identifier+':checkbox').parent().hide();});
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block title %}{{ site.domain }}: {% trans 'Feed Reader' %}{% endblock %}
+
+{% block nav_path %}
+    <a href="/">{{ site.domain }}</a> &rsaquo;
+    <a href="{% url 'feedreader:feed_list' %}">{% trans 'Feedreader' %}</a> &rsaquo;
+    {% trans 'Edit' %}
+{% endblock %}
+
+{% block content %}
+    <div id="spinner">
+        <img src="{% static 'spinner.gif' %}" alt="{% trans 'Please Wait' %}" title="{% trans 'Please Wait' %}" />
+    </div>
+    <h1>{% trans 'Feeds' %}</h1>
+    <div style="float:left; width:75%">
+        <form enctype="multipart/form-data" method="post" action="{% url 'feedreader:edit_feeds' %}">
+            {% csrf_token %}
+            <p>
+                <button id="add_feed_button" type="submit">{% trans 'Add Feed' %}</button>
+                {% trans 'URL' %}:
+                {{ form.feed_url }}
+                {% trans 'Group' %}:
+                {{ form.feed_group }}
+            </p>
+            {% if form.feed_url.errors %}
+                <p>{{ form.feed_url.errors }}</p>
+            {% endif %}
+            <p>
+                <button id="add_group_button" type="submit">{% trans 'Add Group' %}</button>
+                {{ form.new_group }}
+            </p>
+            {% if form.new_group.errors %}
+                <p>{{ form.new_group.errors }}</p>
+            {% endif %}
+            <h2>{% trans 'Feed Import and Export in OPML Format' %}</h2>
+            <p>
+                <button id="import" type="submit">{% trans 'Import' %}</button>
+                {{ form.opml_file }}
+            </p>
+            {% if form.opml_file.errors %}
+                <p>{{ form.opml_file.errors }}</p>
+            {% endif %}
+        </form>
+        <form method="get" action="{% url 'feedreader:export_opml' %}">
+            <button id="export" type="submit">{% trans 'Export' %}</button>
+        </form>
+        <h2>{% trans 'Options' %}</h2>
+        <p>
+            {% trans 'Numbers of Entries' %}:
+            {% trans 'Initially displayed' %}
+            <input id="feedreader-Options-number_initially_displayed-{{ feedreader_options.id }}"
+                   type="text"
+                   size="1"
+                   class="data_field"
+                   value="{{ feedreader_options.number_initially_displayed }}">;
+            {% trans 'Added on scrolldown' %}
+            <input id="feedreader-Options-number_additionally_displayed-{{ feedreader_options.id }}"
+                   type="text"
+                   size="1"
+                   class="data_field"
+                   value="{{ feedreader_options.number_additionally_displayed }}">;
+            {% trans 'Maximum saved per Feed' %}
+            <input id="feedreader-Options-max_entries_saved-{{ feedreader_options.id }}"
+                   type="text"
+                   size="1"
+                   class="data_field"
+                   value="{{ feedreader_options.max_entries_saved }}">.
+        </p>
+    </div>
+    <div style="float:left; width:25%">
+        <h2>{% trans 'Current Groups' %}</h2>
+        {% for group in groups %}
+            <p>
+                <span style="font-weight: bold">{{ group }}</span>
+                ({% trans 'delete' %}
+                <input id="feedreader-Group-delete-{{ group.id }}"
+                       type="checkbox"
+                       class="data_field">)
+            </p>
+        {% endfor %}
+    </div>
+    <div style="clear:both;"></div>
+    <h2>{% trans 'Current Feeds' %}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>{% trans 'Title' %}</th>
+                    <th>{% trans 'URL' %}</th>
+                    <th>{% trans 'Group' %}</th>
+                    <th>{% trans 'Delete' %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in groups %}
+                    {% for feed in group.feed_set.all %}
+                        <tr>
+                            <td>{{ feed.title|safe }}</td>
+                            <td>{{ feed.xml_url }}</td>
+                            <td>
+                                <select id="feedreader-Feed-group-{{ feed.id }}" class="data_field">
+                                    <option value="">---------</option>
+                                    {% for feed_group in groups %}
+                                        <option {% if feed_group = group %}selected="selected"{% endif %}
+                                                value="{{ feed_group.id }}">{{ feed_group }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input id="feedreader-Feed-delete-{{ feed.id }}"
+                                    type="checkbox"
+                                class="data_field">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                {% for feed in no_group %}
+                    <tr>
+                        <td>{{ feed.title|safe }}</td>
+                        <td>{{ feed.xml_url }}</td>
+                        <td>
+                            <select id="feedreader-Feed-group-{{ feed.id }}" class="data_field">
+                                <option selected="selected" value="">---------</option>
+                                {% for group in groups %}
+                                    <option value="{{ group.id }}">{{ group }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <input id="feedreader-Feed-delete-{{ feed.id }}"
+                                type="checkbox"
+                                class="data_field">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
+
+{% block footer %}
+    <p>
+        <a href="#" title="{% trans 'Back to Top' %}">{% trans 'Top' %}</a>;
+        <a href="{% url 'admin:feedreader_feed_changelist' %}" title="{% trans 'Edit Feeds' %}">{% trans 'Admin' %}</a>;
+        <a href="{{ logout_url }}">{% trans 'Logout' %}</a>.
+    </p>
+{% endblock %}

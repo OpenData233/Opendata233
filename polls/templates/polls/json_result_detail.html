@@ -1,0 +1,10 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for choice in object.choice_set.all %}
+<div id="{{choice.id}}" name="choice-{{choice.id}}">{{choice.text}} - {{ choice.votes }} <br/></div>
+{% endfor %}
+
+{% endblock %}

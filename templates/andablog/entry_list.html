@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% load andablog_tags %}
+
+
+    {% block andablog_content %}
+        {% block content %}
+     <div class="container">
+             <div class="row">
+        <div class="col s12 m4 l9">
+
+    {% for entry in entries %}
+        <div class="row">
+            <div class="card-panel">
+                <div class="blog-post">
+                    <h6 class="blog-post-title"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>{% if not entry.is_published %} <span class="label label-default">Draft</span>{% endif %}</h6>
+                    <p class="blog-post-meta">{{ entry.published_timestamp|date:"DATE_FORMAT" }}{% if entry.author %} by {{ entry.author|authordisplay }}{% endif %}</p>
+                    <p>
+                        {# TODO: "Better support for truncating markup" #2 #}
+                        {# Truncate derived from: Avg reading speed (3.33 words/s) * Average attention span (8s) #}
+                        {{ entry.content|truncatewords_html:40 }} <a href="{{ entry.get_absolute_url }}">(More...) {% include "andablog/comments_count_snippet.html" with comment_object=entry %}</a>
+                    </p>
+                </div><!-- /.blog-post -->
+            </div>
+        </div>
+    {% endfor %}
+
+    {% include "andablog/pagination_snippet.html" with page_obj=page_obj %}
+        </div>
+
+        <div class="col s12 m4 l3">
+        </div>
+    </div>
+
+
+
+     </div>
+
+{% endblock %}
+
+{% endblock %}

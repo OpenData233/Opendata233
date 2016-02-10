@@ -8,7 +8,6 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
 import os
 import dj_database_url
 
@@ -29,12 +28,28 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'material',
+    'material.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.postgres',
+    'sorl.thumbnail',
+    'django_extensions',
+    'andablog',
+    'taggit',
+    'markitup',
+    'markdown',
+    'newsletter',
+    'feedreader',
+    'polls',
+    'core',
+
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -48,12 +63,25 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
+SITE_ID = 1  #THIS PREVENTS Settings' object has no attribute 'SITE_ID' ERROR
+
+ADMINS = (
+    ('admin', 'barjebernard@gmail.com'),   # email will be sent to your_email
+)
+
+MANAGERS = ADMINS
+
+""" A python-markdown example that allows HTML in the entry content """
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': False})
+MARKITUP_SET = 'markitup/sets/markdown/'
+
+
 ROOT_URLCONF = 'Odata.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,10 +103,15 @@ WSGI_APPLICATION = 'Odata.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'odata',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -105,7 +138,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Update database configuration with $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=500)
+db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()

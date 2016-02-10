@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load andablog_tags %}
+
+{% block andablog_meta %}
+    <meta name="description" content="{{ entry.title }}">
+    <meta name="author" content="{{ entry.author.get_short_name }}">
+{% endblock %}
+
+{% block andablog_page_title %}
+    {{ entry.title }}
+{% endblock %}
+
+{% block andablog_content %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m4 l9">
+                 <div class="blog-post">
+        <h5 class="blog-post-title"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>{% if not entry.is_published %} <span class="label label-default">Draft</span>{% endif %}</h5>
+        <p class="blog-post-meta">{{ entry.published_timestamp|date:"DATE_FORMAT" }}{% if entry.author %} by {{ entry.author|authordisplay }}{% endif %}</p>
+        <p>
+                     <hr>
+            {{ entry.content }}
+        </p>
+
+        {% include "andablog/comments_snippet.html" with comment_object=entry %}
+    </div>
+            </div>
+
+        <div class="col s12 m4 l3">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <hr>
+            <h5 class="center">More Articles</h5>
+              {% for entry in entries %}
+                  <p class="black-text"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></p>
+              {% endfor %}
+
+        </div>
+
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+{% endblock %}

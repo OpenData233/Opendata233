@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="row">
+       <div class="col s12 m4">
+           <div class="card medium">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{% static 'images/mahama.jpeg' %}" >
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">John Mahama<i class="material-icons right">more_vert</i></span>
+      <p><a href="{% url 'core:mahama' %}">View Brief Bio</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">John Mahama - NDC<i class="material-icons right">close</i></span>
+      <p>
+
+      </p>
+    </div>
+  </div>
+
+
+       </div>   <div class="col s12 m4">
+             <div class="card medium">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator"  src={% static "images/nana.png" %}>
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">NANA  AKUFFO-ADDO<i class="material-icons right">more_vert</i></span>
+      <p><a href="{% url 'core:nana' %}">View Brief Bio</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">NANA ADDO DANKWA AKUFFO-ADDO - NPP<i class="material-icons right">close</i></span>
+      <p>
+          Nana Addo Dankwa Akufo-Addo is one of Ghana’s foremost politicians. His political career has spanned some 40 years and in recent times, his contributions to human rights, democracy and the rule of law are unmatched on Ghana’s political landscape.
+
+Ghana’s most popular politician today, he is widely respected as a statesman, a patriot, a visionary and his passion for Ghana’s development is widely acknowledged, even by his opponents.
+
+Born 29 March 1944 in Swalaba, Accra, Nana was raised in Ga Maami - the heart of Accra - and in Nima. His father’s Accra residence, Betty House at Korle Wokon, became the de facto headquarters of the country’s first political party, the United Gold Coast Convention (UGCC), after it was founded at Saltpond in 1957.
+
+Politics can be said to be a genetic blueprint of Nana Addo’s family. Three of the founding fathers of Ghana, fondly called the Big Six, were Nana’s blood relations - J.B. Danquah (grand-uncle), William Ofori-Atta (uncle) and Edward Akufo-Addo (his father). His father later became the third Chief Justice of Ghana and then served as ceremonial President of the Republic from 1969-72.
+
+
+
+      </p>
+        <span class="card-title grey-text text-darken-4">POLITICAL CAREER</span>
+
+
+    </div>
+  </div>
+
+
+
+       </div>   <div class="col s12 m4">
+             <div class="card medium">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{% static 'images/Greenstreet.jpg' %}">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">IVOR KOBINA GREENSTREET<i class="material-icons right">more_vert</i></span>
+      <p><a href="{% url 'core:greenstreet' %}">View Brief Bio</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">IVOR KOBINA GREENSTREET<i class="material-icons right">close</i></span>
+      <p></p>
+    </div>
+  </div>
+       </div>
+
+
+    </div>
+
+
+{% endblock %}

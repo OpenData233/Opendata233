@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block content %}
+
+    <div class="container">
+        <div class="row center">
+            <div class="card green">
+                    {% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li class="card-panel white-text"><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+{% endblock %}

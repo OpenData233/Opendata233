@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{%  load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="container">
+    <div class="row center">
+        <div class="col s12 m4"><br></div>
+
+        <div class="col s12 m4">
+        <div class="card medium">
+
+
+
+
+<h5>{{ question.question_text }}</h5>
+            <hr>
+            <br>
+            <hr>
+{% if error_message %}<p class="red-text"><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <p>
+        <input type="radio" name="choice" class="with-gap" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    </p>
+    <hr>
+{% endfor %}
+
+
+<input type="submit" class="btn" value="Vote" />
+</form>
+
+
+            </div>
+        </div>
+        <div class="col s12 m4"><br><div id="result"></div></div>
+    </div>
+    </div>
+
+    <script>
+$( document ).ready(function() {
+    $( "#voteform" ).submit(function( event ) {
+        event.preventDefault();
+        var $form = $( this ),
+        term = $form.find( "input[name='s']" ).val(),
+        url = "/poll/" + $form.attr("name")+ "/vote";
+        var posting = $.post( url, $form.serialize());
+        posting.done(function( data ) {
+            $( "#result" ).append( data );
+            });
+        });
+    });
+</script>
+{% endblock content%}

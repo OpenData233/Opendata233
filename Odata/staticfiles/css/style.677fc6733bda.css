@@ -1,0 +1,23 @@
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+/* flex to maintain aspect ration across all devices */
+  main {
+    flex: 1 0 auto;
+  }
+
+
+  /*footer should be down regardless of content size on page
+
+  .page-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}*/
+#subBtn{
+    width:340px;
+}

@@ -1,0 +1,314 @@
+{% extends "base.html" %}
+
+{% load i18n staticfiles %}
+
+{% block extra_head %}
+    <style type="text/css">
+        #menu {margin-bottom: 1em;}
+        .mark_read_request {font-weight:bold;}
+        .poll_request {text-decoration:none;}
+        p.feedreader_menu {font-size: small; margin: 0;}
+        p.feedreader_subtitle {font-size: small;}
+        #content {width: 80%;}
+        .feed_entry {padding: 0.2em 0.5em; margin: 0.5em; border: 1px solid #046; border-radius: 1em;}
+        .read_entry {color:#888;}
+        #feed_entry_search {margin-top: 1em;}
+        #spinner {position: fixed; top: 50%; left: 50%; margin-top: -64px; margin-left: -64px; z-index: 3;}
+        #import_opml_label {color:#046; text-decoration:underline; cursor:pointer;}
+    </style>
+    <script type="text/javascript">
+        function get_feedreader_filter(elem, current_filter) {
+            if ($(elem).attr('id') == 'show_read') {
+                var feedreader_filter = current_filter.group_id+'&'+current_filter.feed_id;
+                if ($(elem).prop('checked')) {
+                    feedreader_filter +='&show_read_flag=1';
+                };
+            }
+            else {
+                var group_id = $(elem).parents('div.group').attr('id');
+                var feed_id = $(elem).parents('div.feed').attr('id');
+                var feedreader_filter = '';
+                if (group_id != null) {
+                    feedreader_filter = group_id;
+                }
+                if (feed_id != null) {
+                    if (feedreader_filter != '') {feedreader_filter += '&';}
+                    feedreader_filter += feed_id;
+                };
+                if ($(elem).hasClass('poll_request')) {
+                    if (feedreader_filter != '') {feedreader_filter += '&';}
+                    feedreader_filter += 'poll_flag=1';
+                };
+                if ($(elem).hasClass('mark_read_request')) {
+                    if (feedreader_filter != '') {feedreader_filter += '&';}
+                    feedreader_filter += 'mark_read_flag=1';
+                };
+                if ($('#show_read').prop('checked')) {
+                    if (feedreader_filter != '') {feedreader_filter += '&';}
+                    feedreader_filter +='show_read_flag=1';
+                };
+            }
+            return feedreader_filter
+        };
+        function populate_unread_nums() {
+            $.get('{% url 'feedreader:num_unread' %}',
+                function(json) {
+                    $.each(json, function(key, value) {
+                        if (value == 0) {
+                            $('#'+key).text('');
+                        }
+                        else {
+                            $('#'+key).text('('+value+')');
+                        }
+                    });
+                }
+            )
+        };
+        function mark_read_on_click() {
+            $('.feed_entry').not('.read_entry').mousedown(function() {
+                // Mark entry as read on click
+                var entry_id = $(this).attr('id');
+                var request_elem = this;
+                $.ajax({url:'{% url 'feedreader:mark_entry_read' %}?'+entry_id,
+                    success:function(){
+                        $(request_elem).addClass('read_entry');
+                        populate_unread_nums();
+                        mark_read_on_click();
+                        $(request_elem).off('mousedown');
+                    }});
+            });
+        };
+        $(function() {
+            var current_filter = {
+                group_id: 'group_id=0',
+                feed_id: 'feed_id=0'
+            };
+            $('a.load_request').click(function(e) { // Disable links
+                e.preventDefault();
+            });
+            $(document).hide().ajaxStart(function() {$('#spinner').show();})
+                                .ajaxStop(function() {$('#spinner').hide();});
+            $('.load_request').click(function() {
+                var request_elem = this;
+                $('#entries').load('{% url 'feedreader:entry_list' %}',
+                    get_feedreader_filter(this, current_filter),
+                    function () {
+                        populate_unread_nums();
+                        mark_read_on_click();
+                        if ($(request_elem).attr('id') != 'show_read') {
+                            group_id = $(request_elem).parents('div.group').attr('id');
+                            if (group_id == null) {group_id = 'group_id=0';}
+                            current_filter.group_id = group_id;
+                            feed_id = $(request_elem).parents('div.feed').attr('id');
+                            if (feed_id == null) {feed_id = 'feed_id=0';}
+                            current_filter.feed_id = feed_id;
+                        }
+                    }
+                )
+            });
+            $(window).scroll(function() {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                    // Has reached bottom of the page
+                    if ($('#no_entries').length == 0) {
+	                    $('#entries > .feed_entry').not('.read_entry').addClass('read_entry').off('mousedown');
+	                    var entry_id = $('#entries > .feed_entry').last().attr('id');
+	                    var feedreader_filter = current_filter.group_id+'&'+current_filter.feed_id+'&'+entry_id;
+	                    if ($('#show_read').prop('checked')) {
+	                        feedreader_filter += '&show_read_flag=1';
+	                    };
+	                    if (entry_id == null) {entry_id = '';}
+	                    $.get('{% url 'feedreader:entry_list' %}',
+	                        feedreader_filter,
+	                        function (data) {
+	                            $('#entries').append(data);
+	                            populate_unread_nums();
+	                            mark_read_on_click();
+	                        }
+	                    );
+	                }
+                }
+            });
+            populate_unread_nums();
+            mark_read_on_click();
+            {% for group in group_list %}
+                $('#group_{{ group.id }}_show').click(function() {
+                    $('#group_{{ group.id }}_feeds').show('slow', function() {});
+                    $('#group_{{ group.id }}_show').hide();
+                    $('#group_{{ group.id }}_hide').show();
+                });
+                $('#group_{{ group.id }}_hide').click(function() {
+                    $('#group_{{ group.id }}_feeds').hide('slow', function() {});
+                    $('#group_{{ group.id }}_show').show();
+                    $('#group_{{ group.id }}_hide').hide();
+                });
+                $('#group_{{ group.id }}_feeds').hide();
+                $('#group_{{ group.id }}_hide').hide();
+            {% endfor %}
+            $('#all_entries_header').click(function() {
+                {% for group in group_list %}
+                    $('#group_{{ group.id }}_feeds').hide();
+                    $('#group_{{ group.id }}_show').show();
+                    $('#group_{{ group.id }}_hide').hide();
+                {% endfor %}
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block title %}{{ site.domain }}: {% trans 'Feed Reader' %}{% endblock %}
+
+{% block nav_path %}<a href="/">{{ site.domain }}</a> &rsaquo; {% trans 'Feed Reader' %}{% endblock %}
+
+{% block content %}
+    <h4 class=" center ">{% trans 'Political News Feeds' %}</h4>
+    <hr class="green">
+
+    <!-- displaying feeds list -->
+    <div class="container">
+    <div class="row">
+        <div class="col s12 m4 l9">
+
+{% if entries_header %}<h5 class="center">{{ entries_header }}</h5>{% endif %}
+            <hr>
+{% if entry_list %}
+    {% for entry in entry_list %}
+        <div id="entry_id={{ entry.id }}" class=" feed_entry {% if entry.read_flag %}read_entry{% endif %}">
+            <br>
+            <div>
+                            <p class="green "><a class="white-text" target="_blank" href="{{ entry.link }}">{{ entry.title|safe }} <i class="material-icons">open_in_new</i></a></p>
+
+            </div>
+
+            <p class="feedreader_subtitle fa-external-link">
+                {% trans 'from' %}
+                <a href="{{ entry.feed.link }}" title="{{ entry.feed.description|safe }}">
+                    {{ entry.feed.title|safe }}</a>
+                {% trans 'on' %} {{ entry.published_time|date:"d M Y" }} ({{ entry.published_time|timesince }} ago)
+            </p>
+            <p>{{ entry.description|safe }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+{% else %}
+    {% if entries_header %}
+        <p id="no_entries">
+            {% if show_read_flag %}
+                {% trans 'No stories found' %}
+            {% else %}
+                {% trans 'No unread stories found' %}
+            {% endif %}
+        </p>
+    {% endif %}
+{% endif %}
+
+        </div>
+
+
+
+        <div class="col s12 l3">
+                    <p>
+            <input id="show_read"
+                class="load_request"
+                type="checkbox"
+                name="{% trans 'Show Stories Already Read' %}">
+
+            {% trans 'Feeds List' %}
+        </p>
+
+
+                <div id="menu">
+
+        <h5 id="all_entries_header">
+            <a class="load_request"
+                href="{% url 'feedreader:feed_list' %}"
+                title="{% trans 'Show All feeds' %}">{% trans 'Latest Feeds' %}</a>
+            <span
+                id="unread_total"
+                title="{% trans 'Mark as Read' %}"
+                class="load_request mark_read_request">
+            </span>
+        </h5>
+        {% for group in group_list %}
+            <div id="group_id={{ group.id }}" class="group">
+                <h3>
+                    <span id="group_{{ group.id }}_show">&#9658;</span>
+                    <span id="group_{{ group.id }}_hide">&#9660;</span>
+                    <a class="load_request"
+                        href="{% url 'feedreader:feed_list' %}?group_id={{ group.id }}"
+                        title="{% trans 'Show All' %} {{ group.name }} feeds">{{ group.name }}</a>&nbsp;<a class="load_request poll_request"
+                        href="{% url 'feedreader:feed_list' %}?group_id={{ group.id }}&poll_flag=1"
+                        title="{% trans 'Poll All' %} {{ group.name }} feeds">&darr;</a>
+                    <span id="unread_group{{group.id}}"
+                        class="load_request mark_read_request"
+                        title="{% trans 'Mark as Read' %}">
+                    </span>
+                </h3>
+                <div id="group_{{ group.id }}_feeds">
+                    {% for feed in group.feed_set.all %}
+                        <div id="feed_id={{ feed.id }}" class="feed">
+                            <p class="feedreader_menu">
+                                <a class="load_request"
+                                    href="{% url 'feedreader:feed_list' %}?feed_id={{ feed.id }}"
+                                    title="{{ feed.description|safe }}">{{ feed.title|safe }}</a>&nbsp;<a class="load_request poll_request"
+                                    href="{% url 'feedreader:feed_list' %}?feed_id={{ feed.id }}&poll_flag=1"
+                                    title="{% trans 'Poll' %} {{ feed.title|safe }} feed">&darr;</a>
+                                <span id="unread_feed{{feed.id}}"
+                                    class="load_request mark_read_request"
+                                    title="{% trans 'Mark as Read' %}">
+                                </span>
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        {% for feed in no_group %}
+            <div id="feed_id={{ feed.id }}" class="feed">
+                <p>
+                    <a class="load_request"
+                        href="{% url 'feedreader:feed_list' %}?feed_id={{ feed.id }}"
+                        title="{{ feed.description|safe }}">{{ feed.title|safe }}</a>&nbsp;<a class="load_request poll_request"
+                        href="{% url 'feedreader:feed_list' %}?feed=_id{{ feed.id }}&poll_flag=1"
+                        title="{% trans 'Poll' %} {{ feed.title|safe }} feed">&darr;</a>
+                    <span id="unread_feed{{feed.id}}"
+                        class="load_request mark_read_request"
+                        title="{% trans 'Mark as Read' %}">
+                    </span>
+                </p>
+            </div>
+        {% endfor %}
+        <form name="input" action="{% url 'feedreader:search' %}" method="get" style="padding-right:1em;">
+            <input id="feed_entry_search" type="text" tabindex="2" size="10"
+                style="color:{% if feedreader_search_string %}#000;{% else %}#ccc{% endif %};"
+                name="feedreader_search_string" title="{% trans 'Search Feeds' %}" class="text"
+                value="{% if feedreader_search_string %}{{ feedreader_search_string }}{% else %}{% trans 'Search Feeds' %}{% endif %}"/>
+        </form>
+
+
+            <div class="fb-page" data-href="https://www.facebook.com/opendata233/?fref=ts" data-tabs="timeline, events" data-height="600" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/opendata233/?fref=ts">
+                     <a href="https://www.facebook.com/opendata233/?fref=ts">Open Data 233</a>
+                 </blockquote></div></div>
+
+
+                <!-- twitter -->
+                 <a class="twitter-timeline"  href="https://twitter.com/search?q=%20%23opendata233" data-widget-id="694556844061233156">Tweets about  #opendata233</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+
+    </div>
+        </div>
+    </div>
+    </div>
+
+    <hr>
+
+{% endblock %}
+
+{% block footer %}
+    <p>
+        <a href="#" title="{% trans 'Back to Top' %}">{% trans 'Top' %}</a>;
+        <a href="{% url 'feedreader:edit_feeds' %}" title="{% trans 'Edit Feeds' %}">{% trans 'Edit' %}</a>;
+        <a href="{{ logout_url }}">{% trans 'Logout' %}</a>.
+    </p>
+{% endblock %}

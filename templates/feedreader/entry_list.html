@@ -1,0 +1,55 @@
+{% load i18n %}
+{% load staticfiles %}
+
+<div class="container">
+    <div class="col s12 l9 m4">
+
+      <div class="row left z-depth-3">
+
+{% if entries_header %}<h5 class="center">{{ entries_header }}</h5>{% endif %}
+{% if entry_list %}
+    {% for entry in entry_list %}
+        <div id="entry_id={{ entry.id }}" class="feed_entry {% if entry.read_flag %}read_entry{% endif %}">
+            <h6><a href="{{ entry.link }}">{{ entry.title|safe }}</a></h6>
+
+            <p class="feedreader_subtitle fa-external-link">
+                {% trans 'from' %}
+                <a href="{{ entry.feed.link }}" title="{{ entry.feed.description|safe }}">
+                    {{ entry.feed.title|safe }}</a>
+                {% trans 'on' %} {{ entry.published_time|date:"d M Y" }} ({{ entry.published_time|timesince }} ago)
+            </p>
+            <p>{{ entry.description|safe }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+{% else %}
+    {% if entries_header %}
+        <p id="no_entries">
+            {% if show_read_flag %}
+                {% trans 'No stories found' %}
+            {% else %}
+                {% trans 'No unread stories found' %}
+            {% endif %}
+        </p>
+    {% endif %}
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+    </div>
+</div>
+
+
+
+
+

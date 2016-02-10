@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div class="slider" >
+    <ul class="slides" style="height: 500px">
+      <li>
+        <img src="http://res.cloudinary.com/py/image/upload/c_scale,h_385,q_100/v1455000813/flagstaff.png"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>Welcome to Ghana!!!</h3>
+          <h5 class="light grey-text text-lighten-3">The Land of Peace</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://res.cloudinary.com/py/image/upload/v1455000822/gh_xottkt.png"> <!-- random image -->
+        <div class="caption left-align">
+          <h3>Opendata233</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our contribution</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
+        <div class="caption right-align">
+          <h3>Ghana is yours blah blah</h3>
+          <h5 class="light grey-text text-lighten-3">another blah blah</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>Vote Wisely</h3>
+          <h5 class="light grey-text text-lighten-3">blah blah blah</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="container">
+
+    <div class="section">
+        <div class="row center">
+            <h4 class="tooltip" title="OpenData233">Welcome to OpenData233</h4>
+              <p>OpenData233 is a non partisan project. We aim to keep an eye on Election 2016 to promote greater public voice and enhance public participation in politics</p>
+        </div>
+    </div>
+
+        <hr>
+
+     <div class="row">
+         <div class="col s12 m4">
+             <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src={% static "images/gh.jpeg" %}>
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">News<i class="material-icons right">more_vert</i></span>
+    <p><a> <button class="btn waves-effect waves-yellow" type="submit" name="action">Read
+    <i class="material-icons right">description</i>
+  </button></a></p>    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Election Related News<i class="material-icons right">close</i></span>
+      <p>Get all the latest news headlines that concern the upcoming elections from all the top news site in Ghana.</p>
+    </div>
+  </div>
+              </div>
+
+             <!-- card 2 -->
+         <div class="col s12 m4">
+          <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src={% static "images/gh.jpeg" %}>
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Polls<i class="material-icons right">more_vert</i></span>
+    <p><a href="{% url 'polls:index' %}"> <button class="btn waves-effect waves-yellow" type="submit" name="action">Participate
+    <i class="material-icons right">assessment</i>
+  </button></a></p>    </div>
+
+
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Pols<i class="material-icons right">close</i></span>
+      <p>Participate in these polls to show your support and find out how your party and candidate is faring.</p>
+    </div>
+  </div>
+     </div>
+
+
+
+
+         <!-- card 3 -->
+
+
+         <div class="col s12 m4">
+           <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src={% static 'images/gh.jpeg' %}>
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Candidates<i class="material-icons right">more_vert</i></span>
+      <p><a href="{% url 'core:candidates' %}"> <button class="btn waves-effect waves-yellow" type="submit" name="action">Meet Them
+    <i class="material-icons right">visibility</i>
+  </button></a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Party Flag Bearers<i class="material-icons right">close</i></span>
+      <p>Read more on the party flagbearers that will be participating in the elections.</p>
+    </div>
+  </div>
+
+         </div>
+     </div>
+    </div>
+
+    <hr class="container">
+
+    <div class="row container">
+   <p class="center"><button class=" btn-large btn-flat">Trending<i class="material-icons right">trending_up</i></button></p>
+
+      <div class="progress">
+      <div class="indeterminate"></div>
+  </div>
+    <div class="col s12 m4">
+              <a class="twitter-timeline"  href="https://twitter.com/search?q=%20%23opendata233" data-widget-id="694556844061233156">Tweets about  #opendata233</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    </div>
+
+        <div class="col s12 m4">
+                    <a class="twitter-timeline"  href="https://twitter.com/search?q=%20%23opendata233" data-widget-id="694556844061233156">Tweets about  #opendata233</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    </div>
+
+        <div class="col s12 m4">
+                 <div class="fb-page" data-href="https://www.facebook.com/opendata233/?fref=ts" data-tabs="timeline, events" data-height="600" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/opendata233/?fref=ts">
+                     <a href="https://www.facebook.com/opendata233/?fref=ts">Open Data 233</a>
+                 </blockquote></div></div>
+    </div>
+    </div>
+
+    <hr>
+
+ <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+
+    <script >
+  $(document).ready(function(){
+      $('.slider').slider();
+    });
+
+    </script>
+
+{% endblock %}
+
+
