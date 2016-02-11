@@ -19,9 +19,14 @@
                  <div class="blog-post">
         <h5 class="blog-post-title"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>{% if not entry.is_published %} <span class="label label-default">Draft</span>{% endif %}</h5>
         <p class="blog-post-meta">{{ entry.published_timestamp|date:"DATE_FORMAT" }}{% if entry.author %}  {{ entry.author| authordisplay }}{% endif %}</p>
+       <div class="fb-like" data-href="https://opendata233.herokuapp.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         <p>
                      <hr>
+
             {{ entry.content }}
+                                          <div class="fb-share-button" data-href="https://opendata233.herokuapp.com" data-layout="button_count"></div>
+<div class="fb-like" data-href="https://opendata233.herokuapp.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+
         </p>
           <div class="fb-comments" data-href="https://opendata233.herokuapp.com" data-numposts="10"></div>
 
