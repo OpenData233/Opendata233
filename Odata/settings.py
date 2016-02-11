@@ -23,7 +23,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "zn@m!7hwud5@)s=$9fn=%cutq47k29lcw@f_gh17vx%w(m4$-0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Application definition
 
@@ -80,10 +80,11 @@ MARKITUP_SET = 'markitup/sets/markdown/'
 
 #Email
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'Opendataa233 hackertest11@gmail.com'
+EMAIL_HOST_USER = 'hackertest11@gmail.com'
 EMAIL_HOST_PASSWORD = 'slim1992'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'hackertest11@gmail.com'
 
 ROOT_URLCONF = 'Odata.urls'
 
