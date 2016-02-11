@@ -79,7 +79,7 @@ MARKITUP_SET = 'markitup/sets/markdown/'
 
 
 #Email
-EMAIL_HOST = 'host.africahostway.com '
+EMAIL_HOST = 'mail.opendata233.com'
 EMAIL_HOST_USER = 'info@opendata233.com'
 EMAIL_HOST_PASSWORD = '@BigData2016'
 EMAIL_PORT = 465
