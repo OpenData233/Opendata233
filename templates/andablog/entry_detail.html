@@ -12,16 +12,18 @@
 
 {% block andablog_content %}
 {% block content %}
+
     <div class="container">
         <div class="row">
             <div class="col s12 m4 l9">
                  <div class="blog-post">
         <h5 class="blog-post-title"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>{% if not entry.is_published %} <span class="label label-default">Draft</span>{% endif %}</h5>
-        <p class="blog-post-meta">{{ entry.published_timestamp|date:"DATE_FORMAT" }}{% if entry.author %} by {{ entry.author|authordisplay }}{% endif %}</p>
+        <p class="blog-post-meta">{{ entry.published_timestamp|date:"DATE_FORMAT" }}{% if entry.author %}  {{ entry.author| authordisplay }}{% endif %}</p>
         <p>
                      <hr>
             {{ entry.content }}
         </p>
+          <div class="fb-comments" data-href="https://opendata233.herokuapp.com" data-numposts="10"></div>
 
         {% include "andablog/comments_snippet.html" with comment_object=entry %}
     </div>
@@ -31,14 +33,6 @@
             <br>
             <br>
             <br>
-            <br>
-            <br>
-            <hr>
-            <h5 class="center">More Articles</h5>
-              {% for entry in entries %}
-                  <p class="black-text"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></p>
-              {% endfor %}
-
         </div>
 
 
@@ -57,7 +51,7 @@
 
         <div class="col s12 m4 l6">
                         <div class="card-panel light-green ">
-                <div class="card-title white-text"> Next >></div>
+                <div class="card-title white-text right-align"> Next >></div>
                             <p>another article</p>
             </div>
         </div>
