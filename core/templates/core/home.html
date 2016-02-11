@@ -147,6 +147,30 @@
 
     <hr>
 
+  <!-- Modal Structure -->
+  <div id="sign-up" class="modal">
+    <div class="modal-content">
+    <div class="col m4 s12">
+            <h4 class="green-text center"> Subscribe to Newsletter</h4>
+            <p class="center">We will keep watch and update you.</p>
+            <form action="" class="well" id="subscription">
+                {% csrf_token %}
+                <div class="input-field center">
+                 <input id="email" type="email" class="validate white">
+                 <label for="email">Email</label>
+           <button  class="btn center green btn-large">Subscribe   <span><i class="material-icons">email</i></span></button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">click anywhere on the screen to dismiss this.</a>
+    </div>
+  </div>
+
+
  <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
@@ -157,6 +181,12 @@
     <script >
   $(document).ready(function(){
       $('.slider').slider();
+
+      $('#sign-up').openModal({
+           in_duration: 1000,
+           out_duration: 600,
+      });
+
     });
 
     </script>
