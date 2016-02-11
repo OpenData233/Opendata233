@@ -9,7 +9,8 @@
                     {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li class="card-panel white-text"><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a> <div class="fb-share-button" data-href="https://opendata233.herokuapp.com" data-layout="button_count"></div></li>
+        <li class="card-panel white-text"><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+        <div class="fb-share-button" data-href="https://opendata233.herokuapp.com" data-layout="button_count"></div>
     {% endfor %}
     </ul>
             </div>
