@@ -79,12 +79,12 @@ MARKITUP_SET = 'markitup/sets/markdown/'
 
 
 #Email
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'hackertest11@gmail.com'
-EMAIL_HOST_PASSWORD = 'slim1992'
-EMAIL_PORT = 587
+EMAIL_HOST = 'host.africahostway.com '
+EMAIL_HOST_USER = 'info@opendata233.com'
+EMAIL_HOST_PASSWORD = '@BigData2016'
+EMAIL_PORT = 465
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'hackertest11@gmail.com'
+DEFAULT_FROM_EMAIL = 'info@opendata233.com'
 
 ROOT_URLCONF = 'Odata.urls'
 
