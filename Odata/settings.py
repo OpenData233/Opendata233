@@ -23,7 +23,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "zn@m!7hwud5@)s=$9fn=%cutq47k29lcw@f_gh17vx%w(m4$-0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Application definition
 
@@ -76,6 +76,13 @@ MANAGERS = ADMINS
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': False})
 MARKITUP_SET = 'markitup/sets/markdown/'
 
+
+#Email
+EMAIL_HOST = 'host.africahostway.com'
+EMAIL_HOST_USER = 'info@opendata233.com'
+EMAIL_HOST_PASSWORD = '@BigData2016'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
 
 ROOT_URLCONF = 'Odata.urls'
 
