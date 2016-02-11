@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/materialize.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -119,15 +119,21 @@
   </footer>
   </div>
 
-<script src="{% static 'js/jquery-1.11.3" ></script>
-      <script href="{% static 'js/materialize.min.js' %}" ></script>
-      <script src="{% static 'js/init.js' %}"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" ></script>
+      <script href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js" ></script>
+
+
 <script>
     $(document).ready(function(){
 
 $(".dropdown-button").dropdown();
+            $('.button-collapse').sideNav();
+      $('.carousel').carousel();
+
+
 
     });
+
 </script>
 
 </main>
