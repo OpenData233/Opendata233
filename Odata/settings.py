@@ -104,11 +104,11 @@ WSGI_APPLICATION = 'Odata.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'odata',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'dbqh95tis5kbch',
+        'USER': 'qwuyxoomyyrqrb',
+        'PASSWORD': 'dEtKKZSWe1peLzcup3nOj_Pn2w',
+        'HOST': 'postgres://qwuyxoomyyrqrb:dEtKKZSWe1peLzcup3nOj_Pn2w@ec2-54-225-223-40.compute-1.amazonaws.com:5432/dbqh95tis5kbch',
+        'PORT': '5432',
     }
 }
 
