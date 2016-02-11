@@ -76,9 +76,9 @@
 
 
         <footer class="page-footer black">
-    <div class="container">
+    <div class="">
       <div class="row">
-        <div class="col l4 m4 s12">
+        <div class="col l3 m4 s12">
           <h5 class="white-text ">OpenData233</h5>
           <p class="grey-text text-lighten-4">
               OpenData233 is a non partisan project. <br/> We aim to keep an eye on Election 2016 to promote greater public voice and enhance public participation in politics
@@ -86,7 +86,7 @@
 
         </div>
 
-        <div class="col l4 m4 s12">
+        <div class="col l3 m4 s12">
             <h5 class="white-text center"> Subscribe to Newsletter</h5>
             <p class="center white-text">Subscribe for the latest updates on the elections</p>
             <form action="" class="well" id="subscription">
@@ -101,36 +101,61 @@
             </form>
         </div>
 
-        <div class="col l4 s12">
+        <div class="col l3 s12">
+
+          <h5 class="white-text center">Links</h5>
+          <ul>
+<li class="center"><a href="{% url 'contact:contact_form' %}">Contact us</i></a></li>
+<li class="center"><a href="{% url 'core:about' %}">About</a></li>
+              <li class="center"><a href="{% url 'feedreader:feed_list' %}">News Feeds</a></li>
+</ul>
+        </div>       <div class="col l3 s12">
 
           <h5 class="white-text center">Connect</h5>
-          <ul class="center">
-            <li><a class="white-text " href="#!">Facebook</a></li>
-            <li><a class="white-text" href="#!">Twitter</a></li>
-          </ul>
+          <ul>
+<li class="center"><a href="http://facebook.com/"><i class="fa fa-facebook"></i></a></li>
+<li class="center"><a href="http://linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+<li class="center"><a href="http://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+<li class="center"><a href="http://plus.google.com/"><i class="fa fa-google-plus"></i> </a></li>
+</ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Copyright 2016 OpenData233
+          <div class="row">
+              <div class="col s12 m4 l3">
+                   Copyright 2016 OpenData233
+              </div>
+              <div class="col s12 m4 l3">
+
+              </div> <div class="col s12 m4 l3">
+
+              </div>
+          </div>
+
       </div>
     </div>
   </footer>
   </div>
 
-<script src="https://code.jquery.com/jquery-2.1.1.min.js" ></script>
-      <script href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js" ></script>
+ <script src="https://code.jquery.com/jquery-2.1.1.min.js" ></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js" ></script>
 
 
 <script>
     $(document).ready(function(){
-
-$(".dropdown-button").dropdown();
-            $('.button-collapse').sideNav();
-      $('.carousel').carousel();
-
-
+        $('.button-collapse').sideNav();
+$('.carousel').carousel();
+        $('.dropdown-button').dropdown({
+           inDuration: 300,
+           outDuration: 225,
+           constrain_width: true,
+           hover: false,
+           gutter: 0,
+           belowOrigin: false
+           }
+      );
 
     });
 

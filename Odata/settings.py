@@ -66,7 +66,8 @@ MIDDLEWARE_CLASSES = [
 SITE_ID = 1  #THIS PREVENTS Settings' object has no attribute 'SITE_ID' ERROR
 
 ADMINS = (
-    ('admin', 'barjebernard@gmail.com'),   # email will be sent to your_email
+    ('admin', 'barjebernard@gmail.com'),
+    ('opendata', 'info@opendata233.com'),# email will be sent to your_email
 )
 
 MANAGERS = ADMINS
