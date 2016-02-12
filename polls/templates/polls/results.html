@@ -12,7 +12,7 @@
                 <ul class="collection with-header">
                  <li class="collection-header"><h4>{{ question.question_text }}</h4></li>
 {% for choice in question.choice_set.all %}
-    <li><div>{{ choice.choice_text }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+                    <hr>
     <li>{{ choice.choice_text }} {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
     <hr>
 {% endfor %}
