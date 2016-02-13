@@ -1,7 +1,6 @@
 {% load i18n %}
 {% load static %}
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -98,16 +97,19 @@
         <div class="col l3 m4 s12">
             <h5 class="white-text center"> Subscribe to Newsletter</h5>
             <p class="center white-text">Subscribe for the latest updates on the elections</p>
-            <form action="" class="well" id="subscription">
-                {% csrf_token %}
+            <form action="http://formspree.io/barjebernard@gmail.com" method="POST">
                 <div class="input-field center">
+                        <input type="hidden" name="_next" value="."  />
                  <input id="email" type="email" class="validate white">
                  <label for="email">Email</label>
-                                    <button  class="btn center green btn-large">Subscribe   <span><i class="material-icons">email</i></span></button>
+                    <button  class="btn center green btn-large" value="Send" type="submit">Subscribe   <span><i class="material-icons">email</i></span></button>
 
                 </div>
 
             </form>
+
+
+
         </div>
 
         <div class="col l3 s12">
