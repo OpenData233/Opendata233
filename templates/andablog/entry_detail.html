@@ -18,7 +18,7 @@
             <div class="col s12 m4 l9">
                  <div class="blog-post">
         <h5 class="blog-post-title"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>{% if not entry.is_published %} <span class="label label-default">Draft</span>{% endif %}</h5>
-        <p class="blog-post-meta">{{ entry.published_timestamp|date:"DATE_FORMAT" }}{% if entry.author %}  {{ entry.author| authordisplay }}{% endif %}</p>
+                     <hr><p class="blog-post-meta"><h6 class="chip yellow">{{ entry.published_timestamp|date:"DATE_FORMAT" }}</h6> by <h6 class="chip"><i class="material-icons right">person_pin</i>{{ entry.author}}</h6></p>
        <div class="fb-like" data-href="https://opendata233.herokuapp.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         <p>
                      <hr>
@@ -38,6 +38,13 @@
             <br>
             <br>
             <br>
+            <br>
+            <br><br>
+            <hr>
+
+              <div class="fb-page" data-href="https://www.facebook.com/opendata233/?fref=ts" data-tabs="timeline, events" data-height="600" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/opendata233/?fref=ts">
+                     <a href="https://www.facebook.com/opendata233/?fref=ts">Open Data 233</a>
+                 </blockquote></div></div>
         </div>
 
 

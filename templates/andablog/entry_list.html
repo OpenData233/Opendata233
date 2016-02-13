@@ -14,8 +14,11 @@
         <div class="row">
             <div class="card-panel">
                 <div class="blog-post">
-                    <h6 class="blog-post-title"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>{% if not entry.is_published %} <span class="label label-default">Draft</span>{% endif %}</h6>
-                    <p class="blog-post-meta">{{ entry.published_timestamp|date:"DATE_FORMAT" }}{% if entry.author %} by {{ entry.author|authordisplay }}{% endif %}</p>
+                    <div class="row green">
+                        <h5 class=""><a class="white-text" href="{{ entry.get_absolute_url }}"><i class="material-icons left">view_headline</i>{{ entry.title }}</a>{% if not entry.is_published %} <span class="label label-default">Draft</span>{% endif %}</h5>
+
+                    </div>
+                    <p class="blog-post-meta "><h6 class="chip yellow">{{ entry.published_timestamp|date:"DATE_FORMAT" }}</h6> by <h6 class="chip"><i class="material-icons right">person_pin</i>{{ entry.author}}</h6></p>
                     <p>
                         {# TODO: "Better support for truncating markup" #2 #}
                         {# Truncate derived from: Avg reading speed (3.33 words/s) * Average attention span (8s) #}
