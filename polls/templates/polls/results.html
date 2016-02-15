@@ -7,24 +7,25 @@
 
     <div class="container">
         <div class="row">
-            <div class="card small center">
-                <hr>
-                <ul class="collection with-header">
-                 <li class="collection-header"><h4>{{ question.question_text }}</h4></li>
+            <p class="center">Poll Results</p>
+            <div class="card medium">
+                <ul class="">
+                 <li class="center blue-text"><h4>{{ question.question_text }}</h4></li>
+
 {% for choice in question.choice_set.all %}
-                    <hr>
-    <li>{{ choice.choice_text }} {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+                    <br>
+                    <li><h3 class="chip"> {{ choice.choice_text }}</h3> <span class="right chip green white-text">{{ choice.votes }} vote{{ choice.votes|pluralize }}</span>   </li>
     <hr>
 {% endfor %}
+
 </ul>
-            </div>
+                <br>
+                <br>
+                <p class="center">Thanks for taking part in the polls!!!</p>
+
+
+</div></div>
         </div>
-    </div>
-
-
-
-
-
-<a href="{% url 'core:home' %}">Home</a>
-
 {% endblock %}
+
+
