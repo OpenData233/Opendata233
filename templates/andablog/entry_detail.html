@@ -60,10 +60,14 @@
                 <p>another article</p>
             </div>
         </div>
+        {% if  entry.is_published %}
 
         <div class="col s12 m4 l6">
-                        <div class="card-panel light-green ">
-                <div class="card-title white-text right-align"> Next >></div>
+                        <div class="card-panel ">
+                <div class="card-title right-align">
+                            <h5 class="blog-post-title"><a href=""> {{entry_next_created_by_author.title}}</a><span class="label label-default"></span>{% endif %}</h5>
+
+                </div>
                             <p>another article</p>
             </div>
         </div>
