@@ -67,7 +67,8 @@ MIDDLEWARE_CLASSES = [
 SITE_ID = 1  #THIS PREVENTS Settings' object has no attribute 'SITE_ID' ERROR
 
 ADMINS = (
-    ('name', 'example@email.com'),# email will be sent to your_email
+    ('admin', 'barjebernard@gmail.com'),
+    ('opendata', 'info@opendata233.com'),# email will be sent to your_email
 )
 
 MANAGERS = ADMINS
@@ -79,12 +80,12 @@ MARKITUP_SET = 'markitup/sets/markdown/'
 
 
 #Email
-EMAIL_HOST = 'your email host'
-EMAIL_HOST_USER = 'email address'
-EMAIL_HOST_PASSWORD = 'email password'
-EMAIL_PORT = 456 # email smtp port
+EMAIL_HOST = 'mail.opendata233.com'
+EMAIL_HOST_USER = 'info@opendata233.com'
+EMAIL_HOST_PASSWORD = '@BigData2016'
+EMAIL_PORT = 465
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = '' #default email address to send messages from
+DEFAULT_FROM_EMAIL = 'info@opendata233.com'
 
 ROOT_URLCONF = 'Odata.urls'
 
@@ -113,12 +114,12 @@ WSGI_APPLICATION = 'Odata.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbqh95tis5kbch',
+        'USER': 'qwuyxoomyyrqrb',
+        'PASSWORD': 'dEtKKZSWe1peLzcup3nOj_Pn2w',
+        'HOST': 'ec2-54-225-223-40.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -155,7 +156,7 @@ DATABASES['default'].update(db_from_env)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
-ALLOWED_HOSTS = ['enter site address here']
+ALLOWED_HOSTS = ['https://opendata233.herokuapp.com/']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
