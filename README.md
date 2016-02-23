@@ -1,27 +1,17 @@
-# Heroku Django Starter Template
+# Opendata233
 
-An utterly fantastic project starter template for Django 1.9.
+OpenData233 is a non partisan project. We aim to keep an eye on Election 2016 to promote greater public voice and enhance public participation in politics
 
 ## Features
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise
 
 ## How to Use
 
 To use this project, follow these steps:
 
-1. Create your working environment.
-2. Install Django (`$ pip install django`)
-3. Create a new project using this template
+1. Create your working environment recommend using a  virtualenv
+2. clone this project ('git clone http
 
-## Creating Your Project
-
-Using this template to create a new Django app is easy::
-
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
-
-You can replace ``helloworld`` with your desired project name.
 
 ## Deployment to Heroku
 
@@ -33,8 +23,6 @@ You can replace ``helloworld`` with your desired project name.
     $ git push heroku master
 
     $ heroku run python manage.py migrate
-
-See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
 
 ## Further Reading
 
