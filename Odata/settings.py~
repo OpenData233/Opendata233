@@ -20,7 +20,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "zn@m!7hwud5@)s=$9fn=%cutq47k29lcw@f_gh17vx%w(m4$-0"
+SECRET_KEY = "enterasecretkeyhere"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,12 +80,12 @@ MARKITUP_SET = 'markitup/sets/markdown/'
 
 
 #Email
-EMAIL_HOST = 'mail.opendata233.com'
-EMAIL_HOST_USER = 'info@opendata233.com'
-EMAIL_HOST_PASSWORD = '@BigData2016'
-EMAIL_PORT = 465
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'info@opendata233.com'
+DEFAULT_FROM_EMAIL = ''
 
 ROOT_URLCONF = 'Odata.urls'
 
@@ -115,10 +115,10 @@ WSGI_APPLICATION = 'Odata.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbqh95tis5kbch',
-        'USER': 'qwuyxoomyyrqrb',
-        'PASSWORD': 'dEtKKZSWe1peLzcup3nOj_Pn2w',
-        'HOST': 'ec2-54-225-223-40.compute-1.amazonaws.com',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '5432',
     }
 }
@@ -156,7 +156,7 @@ DATABASES['default'].update(db_from_env)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
-ALLOWED_HOSTS = ['https://opendata233.herokuapp.com/']
+ALLOWED_HOSTS = ['https://opendata233.com/']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
