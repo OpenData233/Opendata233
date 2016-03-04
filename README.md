@@ -17,8 +17,8 @@ To use this project, follow these steps:
 7. Install project requirements by running `$ pip install -r requirements.txt`
 8. Prepare for migration ` $ ./manage.py makemigrations`
 9. Migrate `$ ./manage.py migrate`
-10.Create and account to access the admin `$ ./manage.py createsuperuser`
-11. Run `$ python manage.py runserver` 
+10. Create and account to access the admin `$ ./manage.py createsuperuser`
+11.  Run `$ python manage.py runserver` 
 
 
 
