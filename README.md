@@ -8,7 +8,7 @@ OpenData233 is a non partisan project. We aim to keep an eye on Election 2016 to
 
 To use this project, follow these steps:
 
-1. Create your working environment recommend using a  virtualenv( $ virtualenv -p python3.4 --no-site-packages env)
+1. Create your working environment recommend using a  virtualenv( `$ virtualenv -p python3.4 --no-site-packages env`)
 2. ` $ git init`
 3. clone this project ` $ git clone https://github.com/OpenData233/Opendata233.git `
 4. open the settings.py file in #Odata/settings.py
