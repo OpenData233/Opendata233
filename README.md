@@ -9,11 +9,21 @@ OpenData233 is a non partisan project. We aim to keep an eye on Election 2016 to
 
 To use this project, follow these steps:
 
-1. Create your working environment recommend using a  virtualenv
-2. clone this project ('git clone http
+1. Create your working environment recommend using a  virtualenv( $ virtualenv -p python3.4 --no-site-packages env)
+2. ` $ git init`
+3. clone this project ` $ git clone https://github.com/OpenData233/Opendata233.git `
+4. open the settings.py file in #Odata/settings.py
+5.  Create and enter a secret key
+6. Do your database setup (preferably postgres)
+7. Install project requirements by running `$ pip install -r requirements.txt`
+8. Prepare for migration ` $ python manage.py makemigrations`
+9. Migrate `$ python manage.py migrate`
+10. Run `$ python manage.py runserver` 
 
 
-## Deployment to Heroku
+
+
+## To test Heroku
 
     $ git init
     $ git add -A
@@ -29,7 +39,6 @@ To use this project, follow these steps:
 - [Gunicorn](https://warehouse.python.org/project/gunicorn/)
 - [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
 - [dj-database-url](https://warehouse.python.org/project/dj-database-url/)
-- 
 
 ## Project url
 
