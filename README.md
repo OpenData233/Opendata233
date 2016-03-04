@@ -2,7 +2,6 @@
 
 OpenData233 is a non partisan project. We aim to keep an eye on Election 2016 to promote greater public voice and enhance public participation in politics
 
-## Features
 
 
 ## How to Use
